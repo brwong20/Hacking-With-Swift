@@ -54,7 +54,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="5C1-gN-bCw">
             <objects>
-                <tabBarController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="61L-ae-KIS" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="61L-ae-KIS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="07c-Yb-iWs">
                         <autoresizingMask key="autoresizingMask"/>
@@ -71,7 +71,7 @@
         <!--Most Recent-->
         <scene sceneID="R31-4C-yam">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l7U-9E-gYi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="l7U-9E-gYi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Most Recent" id="hVF-Nt-3fM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="omd-Fg-iNt">

@@ -18,9 +18,16 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let urlString = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
+        let urlString: String
         
-        //URL returns URL? so safely unwrap
+        //Since this class is used in two different tabs, differentiate it using the button's tag.
+        if navigationController?.tabBarItem.tag == 0 {
+            urlString = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
+        } else {
+            urlString = "https://api.whitehouse.gov/v1/petitions.json?signatureCountFloor=10000&limit=100"
+        }
+        
+        //URL returns URL? so safely unwrap using optional binding
         if let url = URL(string: urlString) {
             //Try is used to indicate that the method can throw an error
             
@@ -33,11 +40,13 @@ class ViewController: UITableViewController {
                 
                 if json["metadata"]["responseInfo"]["status"].intValue == 200 {
                     parse(json: json)
+                    return
                 }
-            }else{
-                print("Invalid URL")
             }
         }
+        
+        //If parse() wasn't reached, show user an error
+        showError()
         
     }
     
@@ -52,13 +61,12 @@ class ViewController: UITableViewController {
         
         tableView.reloadData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func showError() {
+        let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
