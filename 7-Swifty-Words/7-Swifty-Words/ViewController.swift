@@ -113,7 +113,7 @@ class ViewController: UIViewController {
             splitClues[solutionPosition] = currentAnswer.text! //Replace clue with respective answer
             answersLabel.text = splitClues.joined(separator: "\n")//Join clues with new answer to display
             
-            //Add score and reset
+            //Add score and reset if they guessed the word right
             currentAnswer.text = ""
             score += 1
             
@@ -123,6 +123,11 @@ class ViewController: UIViewController {
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        }else{
+            clearTapped(self)
+            
+            currentAnswer.text = ""
+            score -= 1
         }
     }
     
